@@ -1,5 +1,6 @@
 package com.example.exercise;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.title_layout);
         //mTextView=findViewById(R.id.textView);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView1 = findViewById(R.id.recyclerView1);
@@ -89,10 +92,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         loadNextPage();
-                        adapterVertical.notifyDataSetChanged();
-                        progressBar.setVisibility(View.GONE);
+                        //adapterVertical.notifyDataSetChanged();
+                        //progressBar.setVisibility(View.VISIBLE);
                     }
-                }, 6000);
+                }, 1000);
             }
 
             @Override
@@ -151,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
                 List<MovieResults.Result> listOfMovies = response.body().getResult();
                // PutDataToVerticalRecyclerView(listOfMovies);
-                //progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
 
                 adapterVertical.addAll(listOfMovies);
 
@@ -168,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void loadNextPage() {
-       // progressBar.setVisibility(View.VISIBLE);
+       //progressBar.setVisibility(View.VISIBLE);
         Retrofit retrofit = new Retrofit.Builder().
                 baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -186,10 +189,11 @@ public class MainActivity extends AppCompatActivity {
 
                 if (currentPage != TOTAL_PAGES){
                     adapterVertical.addLoadingFooter();
-                    progressBar.setVisibility(View.VISIBLE);
+                    //progressBar.setVisibility(View.VISIBLE);
                 }
 
                 else isLastPage = true;
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
