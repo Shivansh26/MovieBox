@@ -7,9 +7,9 @@ import retrofit2.http.Query;
 
 public interface ApiCaller {
 
-    @GET("/3/movie/popular")
+    @GET("/3/movie/{category}")
     Call<MovieResults> getMovies(
-            //@Path("category") String category,
+            @Path("category") String category,
             @Query("api_key") String apiKey,
             @Query("language") String language,
             @Query("page") int page

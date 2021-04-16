@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     public static int PAGE_FIRST = 1;
     public int TOTAL_PAGES = 5;
     public int currentPage = PAGE_FIRST;
+    String category1="now_playing";
+    String category2="popular";
 
     public static String API_KEY = "3bfdb20171c7e8d0f9e7bc29c0c44078";
     public static String LANGUAGE = "en-US";
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         ApiCaller apiCaller = retrofit.create(ApiCaller.class);
 
-        Call<MovieResults> call = apiCaller.getMovies(API_KEY, LANGUAGE, currentPage);
+        Call<MovieResults> call = apiCaller.getMovies(category1,API_KEY, LANGUAGE, currentPage);
         call.enqueue(new Callback<MovieResults>() {
             @Override
             public void onResponse(Call<MovieResults> call, Response<MovieResults> response) {
@@ -131,13 +133,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    private void PutDataToVerticalRecyclerView(List<MovieResults.Result> moviesList) {
-//        adapterVertical = new AdapterVertical(this, moviesList);
-//
-//        recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView1.setAdapter(adapterVertical);
-//
-//    }
     private void loadFirstPage() {
         Retrofit retrofit = new Retrofit.Builder().
                 baseUrl(BASE_URL)
@@ -145,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         ApiCaller apiCaller = retrofit.create(ApiCaller.class);
 
-        Call<MovieResults> call = apiCaller.getMovies(API_KEY, LANGUAGE, currentPage);
+        Call<MovieResults> call = apiCaller.getMovies(category2,API_KEY, LANGUAGE, currentPage);
 
 
         call.enqueue(new Callback<MovieResults>() {
@@ -171,14 +166,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void loadNextPage() {
-       //progressBar.setVisibility(View.VISIBLE);
+
         Retrofit retrofit = new Retrofit.Builder().
                 baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiCaller apiCaller = retrofit.create(ApiCaller.class);
 
-        Call<MovieResults> call = apiCaller.getMovies(API_KEY, LANGUAGE, currentPage);
+        Call<MovieResults> call = apiCaller.getMovies(category2,API_KEY, LANGUAGE, currentPage);
         call.enqueue(new Callback<MovieResults>() {
             @Override
             public void onResponse(Call<MovieResults> call, Response<MovieResults> response) {
@@ -189,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (currentPage != TOTAL_PAGES){
                     adapterVertical.addLoadingFooter();
-                    //progressBar.setVisibility(View.VISIBLE);
+
                 }
 
                 else isLastPage = true;
@@ -206,28 +201,5 @@ public class MainActivity extends AppCompatActivity {
 }
 
 
-//        Retrofit retrofit = new Retrofit.Builder().
-//                baseUrl(BASE_URL)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//        ApiCaller apiCaller = retrofit.create(ApiCaller.class);
-//
-//        Call<MovieResults> call = apiCaller.getMovies(CATEGORY, API_KEY, LANGUAGE, TOTAL_PAGES);
-//
-//
-//        call.enqueue(new Callback<MovieResults>() {
-//            @Override
-//            public void onResponse(Call<MovieResults> call, Response<MovieResults> response) {
-//
-//                List<MovieResults.Result> listOfMovies = response.body().getResult();
-//                PutDataToRecyclerView(listOfMovies);
-//                PutDataToVerticalRecyclerView(listOfMovies);
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<MovieResults> call, Throwable t) {
-//                t.printStackTrace();
-//            }
-//        });
+
 
