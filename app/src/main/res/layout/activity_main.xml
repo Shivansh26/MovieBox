@@ -15,11 +15,12 @@
         android:id="@+id/textView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#BD988C"
-        android:padding="10dp"
 
+        android:background="#BC9082"
+
+        android:padding="10dp"
         android:text="Playing Now"
-        android:textColor="#F8C52D"
+        android:textColor="#F4E029"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,6 +43,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Most Popular"
+        android:textColor="#F4E029"
+        android:background="#BC9082"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
